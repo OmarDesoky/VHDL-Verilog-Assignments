@@ -14,32 +14,60 @@ GENERIC (n : integer := 8);
 END ENTITY partA;
 
 ARCHITECTURE arch1 OF partA IS
-signal temp : std_logic_vector(n downto 0);
+
+
+component my_nadder IS
+GENERIC (n : integer := 8);
+PORT(a,b : IN std_logic_vector(n-1 DOWNTO 0);
+cin : IN std_logic;
+s : OUT std_logic_vector(n-1 DOWNTO 0);
+cout : OUT std_logic);
+END component;
+
+
+signal tempa : std_logic_vector(n-1 downto 0);
+signal tempb : std_logic_vector(n-1 downto 0);
+signal tempcin:std_logic;
+signal tempcout:std_logic;
+signal tempf : std_logic_vector(n-1 downto 0);
+
 
 BEGIN
-PROCESS (a,b,sel,cin,temp) IS
+
+u1:my_nadder GENERIC MAP(n=>8) port map(tempa,tempb,tempcin,tempf,tempcout);
+
+PROCESS (a,b,sel,cin,tempa,tempb,tempcin,tempf,tempcout) IS
 BEGIN
 CASE sel IS
   WHEN "00" =>
-        temp <= ('0' & a) + cin;
-        f <= temp((n-1) downto 0);
-       	cout <= temp(n);
+	tempa<=a;
+	tempb<= a and not(a);
+	tempcin<=cin;
+	f<=tempf;
+	cout<=tempcout;
   WHEN "01" =>
-        temp <= ('0' & a) +('0' & b) + cin;
-        f <= temp((n-1) downto 0);
-       	cout <= temp(n);
+	tempa<=a;
+	tempb<=b;
+	tempcin<=cin;
+	f<=tempf;
+	cout<=tempcout;
   WHEN "10" =>
-        temp <= ('0' & a) - ('0' & b) - not(cin);
-        f <= temp((n-1) downto 0);
-       	cout <= temp(n);
+	tempa<=a;
+	tempb<=not(b);
+	tempcin<=cin;
+	f<=tempf;
+	cout<=tempcout;
   WHEN OTHERS  =>
 	CASE cin IS
 	  WHEN '1' =>
 		f <= a and not(a);
 	  WHEN OTHERS =>
-		temp <= ('0' & a) - not(cin);
-		f <= temp((n-1) downto 0);
-       		cout <= temp(n);
+		tempa<=a;
+		tempb<=(others =>'1') ;
+		tempb(0) <= '0';
+		tempcin<=cin;
+		f<=tempf;
+		cout<=tempcout;
 	END CASE;
 END CASE;
 END PROCESS;

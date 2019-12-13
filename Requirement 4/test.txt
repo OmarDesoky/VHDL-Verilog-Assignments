@@ -8,6 +8,7 @@ force -freeze sim:/main/bi 00101010 0
 force -freeze sim:/main/load 011 0
 force -freeze sim:/main/load_trans 11 0
 force -freeze sim:/main/selread 1110 0
+force -freeze sim:/main/selwrite 0110 0
 force -freeze sim:/main/we 1 0
 run 
 
@@ -15,6 +16,8 @@ force -freeze sim:/main/Clk 1 0
 force -freeze sim:/main/bi 00010010 0
 force -freeze sim:/main/load 111 0
 force -freeze sim:/main/load_trans 10 0
+force -freeze sim:/main/selread 0110 0
+force -freeze sim:/main/selwrite 0110 0
 force -freeze sim:/main/we 0 0
 run
 
@@ -22,11 +25,14 @@ force -freeze sim:/main/bi 00000101 0
 force -freeze sim:/main/load 011 0
 force -freeze sim:/main/load_trans 11 0
 force -freeze sim:/main/selread 1110 0
+force -freeze sim:/main/selwrite 0110 0
 force -freeze sim:/main/we 1 0
 run
 
 force -freeze sim:/main/bi 00000010 0
 force -freeze sim:/main/load 111 0
 force -freeze sim:/main/load_trans 10 0
+force -freeze sim:/main/selread 0110 0
+force -freeze sim:/main/selwrite 0110 0
 force -freeze sim:/main/we 0 0
 run

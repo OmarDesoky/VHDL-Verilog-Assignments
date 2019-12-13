@@ -65,7 +65,9 @@ process(load_trans,load,selwrite,selread, bi,Clk,Rst,d1,d2,d3,d4,d5,d6,o1,o2,o3,
 		elsif((load="110") and (we='1') ) then
 			MDRin<=bi;				-- load data into MARin
 		elsif(load = "111") then
+			MDRin<="ZZZZZZZZ";
 			MARin<=bi;				-- load data into MDRin
+			
 		end if;
 	elsif(load_trans ="11") then 				--101 means transfer 			0X mens disabled
 		if( selwrite="1000" ) then			-- 0XXX means disabled
@@ -81,6 +83,7 @@ process(load_trans,load,selwrite,selread, bi,Clk,Rst,d1,d2,d3,d4,d5,d6,o1,o2,o3,
 		elsif(selwrite="1101" ) then
 			bi<=o6;
 		elsif(selwrite="1110" ) then			-- transfer from MDR to Bus
+			MDRin<="ZZZZZZZZ";
 			bi<=MDRout;
 		
 		end if;
@@ -100,6 +103,7 @@ process(load_trans,load,selwrite,selread, bi,Clk,Rst,d1,d2,d3,d4,d5,d6,o1,o2,o3,
 		elsif(selread="1110"  and (we='1') ) then			-- transfer from bus to MDR
 			MDRin<=bi;	
 		elsif(selread="1111") then			-- transfer from bus to MAR
+			MDRin<="ZZZZZZZZ";
 			MARin<=bi;
 		end if;
 	end if;

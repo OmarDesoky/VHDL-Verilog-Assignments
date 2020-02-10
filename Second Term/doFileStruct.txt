@@ -1,0 +1,38 @@
+vcom -reportprogress 300 -work work {F:/modelsim/VHDL-Assignments/Second Term/2to1mux.vhd}
+vcom -reportprogress 300 -work work {F:/modelsim/VHDL-Assignments/Second Term/FullAdder.vhd}
+vcom -reportprogress 300 -work work {F:/modelsim/VHDL-Assignments/Second Term/TwoFAdder.vhd}
+vcom -reportprogress 300 -work work {F:/modelsim/VHDL-Assignments/Second Term/MainStructural.vhd}
+
+
+vsim -gui work.mainstructural
+add wave -position insertpoint sim:/mainstructural/*
+
+force -freeze sim:/mainstructural/a 11111111 0
+force -freeze sim:/mainstructural/b 11111111 0
+force -freeze sim:/mainstructural/cin 1 0
+run
+
+force -freeze sim:/mainstructural/a 11111111 0
+force -freeze sim:/mainstructural/b 00000000 0
+force -freeze sim:/mainstructural/cin 1 0
+run
+
+force -freeze sim:/mainstructural/a 11111111 0
+force -freeze sim:/mainstructural/b 10101101 0
+force -freeze sim:/mainstructural/cin 1 0
+run
+
+force -freeze sim:/mainstructural/a 11111111 0
+force -freeze sim:/mainstructural/b 01010101 0
+force -freeze sim:/mainstructural/cin 1 0
+run
+
+force -freeze sim:/mainstructural/a 10001000 0
+force -freeze sim:/mainstructural/b 01000100 0
+force -freeze sim:/mainstructural/cin 0 0
+run
+
+force -freeze sim:/mainstructural/a 10001000 0
+force -freeze sim:/mainstructural/b 01110111 0
+force -freeze sim:/mainstructural/cin 0 0
+run

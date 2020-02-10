@@ -1,0 +1,48 @@
+Library ieee;
+Use ieee.std_logic_1164.all;
+
+entity mainStructural is
+    port(
+        a,b: in std_logic_vector(7 downto 0);
+        cin: in std_logic;
+        sum: out std_logic_vector(7 downto 0);
+        cout: out std_logic
+        );
+end entity;
+
+architecture mainStructArch of mainStructural is
+component twoFAdder is
+    port(
+        a,b: in std_logic_vector(1 downto 0);
+        cin: in std_logic;
+        sum: out std_logic_vector(1 downto 0);
+        cout: out std_logic
+        );
+end component;
+
+component mux2to1 is
+    port(
+        a,b,sel: in std_logic;
+        result: out std_logic
+        );
+end component;
+
+signal carry : std_logic_vector(3 downto 0);
+signal ans1,ans2 : std_logic_vector(7 downto 0);
+begin
+    start:twoFAdder port map(a(1 downto 0),b(1 downto 0),cin,sum(1 downto 0),carry(0));
+
+    genComp0:for i in 1 to 3 generate
+        adder0 : twoFAdder port map(a(i+1 downto i),b(i+1 downto i),'0',ans1(i+1 downto i),carry(i));
+    end generate genComp;
+
+    genComp1:for i in 1 to 3 generate
+    adder1 : twoFAdder port map(a(i+1 downto i),b(i+1 downto i),'1',ans2(i+1 downto i),carry(i));
+    end generate genComp1;
+
+    genCompMux:for i in 0 to 2 generate
+    mux : mux2to1 port map(ans1,ans2,carry(i),sum(i));
+    end generate genCompMux;
+
+    cout<=carry(3);
+end mainStructArch;

@@ -1,0 +1,38 @@
+vcom -reportprogress 300 -work work {F:/modelsim/VHDL-Assignments/Second Term/2to1mux.vhd}
+vcom -reportprogress 300 -work work {F:/modelsim/VHDL-Assignments/Second Term/FullAdder.vhd}
+vcom -reportprogress 300 -work work {F:/modelsim/VHDL-Assignments/Second Term/TwoFAdder.vhd}
+vcom -reportprogress 300 -work work {F:/modelsim/VHDL-Assignments/Second Term/MainHybird.vhd}
+
+
+vsim -gui work.mainhybird
+add wave -position insertpoint sim:/mainhybird/*
+
+force -freeze sim:/mainhybird/a 11111111 0
+force -freeze sim:/mainhybird/b 11111111 0
+force -freeze sim:/mainhybird/cin 1 0
+run
+
+force -freeze sim:/mainhybird/a 11111111 0
+force -freeze sim:/mainhybird/b 00000000 0
+force -freeze sim:/mainhybird/cin 1 0
+run
+
+force -freeze sim:/mainhybird/a 11111111 0
+force -freeze sim:/mainhybird/b 10101101 0
+force -freeze sim:/mainhybird/cin 1 0
+run
+
+force -freeze sim:/mainhybird/a 11111111 0
+force -freeze sim:/mainhybird/b 01010101 0
+force -freeze sim:/mainhybird/cin 1 0
+run
+
+force -freeze sim:/mainhybird/a 10001000 0
+force -freeze sim:/mainhybird/b 01000100 0
+force -freeze sim:/mainhybird/cin 0 0
+run
+
+force -freeze sim:/mainhybird/a 10001000 0
+force -freeze sim:/mainhybird/b 01110111 0
+force -freeze sim:/mainhybird/cin 0 0
+run

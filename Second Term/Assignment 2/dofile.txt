@@ -1,0 +1,9 @@
+vcom -reportprogress 300 -work work {F:/modelsim/VHDL-Assignments/Second Term/Assignment 2/Timer.vhd}
+vcom -reportprogress 300 -work work {F:/modelsim/VHDL-Assignments/Second Term/Assignment 2/TestBench.vhd}
+
+vsim -gui work.testbench
+add wave -position insertpoint sim:/testbench/*
+run
+run
+run
+run

@@ -1,0 +1,13 @@
+vsim -gui work.test_b_machine
+add wave -position insertpoint sim:/test_b_machine/*
+run
+
+run
+run
+run
+run
+
+run
+run
+run
+run
